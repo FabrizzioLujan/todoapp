@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, OnChanges,SimpleChanges, SimpleChange, HostListener} from '@angular/core';
 
 interface Task{
   done: boolean,
@@ -11,14 +11,14 @@ interface Task{
   templateUrl: './todo-card.component.html',
   styleUrls: ['./todo-card.component.scss']
 })
-export class TodoCardComponent implements OnInit, OnDestroy {
+export class TodoCardComponent implements OnInit {
 
   title = "Mis Tareas";
 
   task: Array<Task> = [];
 
-  inputTask = "Nueva Tarea";
-
+  inputTask = "Nueva Tarea"
+  editing:boolean=false;
   constructor() { }
 
   ngOnInit(): void {
@@ -35,7 +35,10 @@ export class TodoCardComponent implements OnInit, OnDestroy {
   }
 
   deleteTask(task: Task){
-
+    const index: number = this.task.indexOf(task);
+    if(index !== -1){
+      this.task.splice(index, 1);
+}
     console.log('Eliminando' + task)
 
   }
